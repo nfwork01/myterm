@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function usage() {
+  cat << __EOF__
+codels [Keyword Before]
+__EOF__
+}
+
+# Argument Handling
+if [ $# -ne 1 ]; then
+  usage
+  exit 1
+fi
+
+clear
+grep -nrIe $1 ./

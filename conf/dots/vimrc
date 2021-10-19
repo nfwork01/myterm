@@ -1,0 +1,11 @@
+set number
+set laststatus=2
+set list
+set listchars=tab:>-,nbsp:_,trail:_,extends:_,precedes:_,eol:$
+set hlsearch
+
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+colorscheme industry

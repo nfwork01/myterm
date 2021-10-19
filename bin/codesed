@@ -1,0 +1,29 @@
+hogemin@nfwprod:/usr/local/bin$ cat ./codesed 
+#!/bin/bash
+
+function usage() {
+  cat << __EOF__
+codesed [Keyword Before] [Keyword After] [Target File]
+ex.)
+  grep -rl "<Keyword Before" | while read FNAME; do codesed [Keyword Before] [Keyword After] ${FNAME}; done
+__EOF__
+}
+
+# Argument Handling
+if [ $# -ne 3 ]; then
+  usage
+  exit 1
+fi
+
+KBEFORE=$1
+KAFTER=$2
+FNAME=$3
+
+# Make archive dir
+TMPDIR=`mktemp -d /tmp/codesed_XXXXXX`
+
+# Do replace
+echo "Change ${FNAME}"
+FNAME_ARCHIVE=${TMPDIR}/${FNAME##*/}
+mv ${FNAME} ${FNAME_ARCHIVE}
+sed -e "s/${KBEFORE}/${KAFTER}/g" ${FNAME_ARCHIVE} > $FNAME
